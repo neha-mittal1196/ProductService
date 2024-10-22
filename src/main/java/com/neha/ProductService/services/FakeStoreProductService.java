@@ -3,6 +3,7 @@ package com.neha.ProductService.services;
 import com.neha.ProductService.dtos.FakeStoreProductDto;
 import com.neha.ProductService.models.Category;
 import com.neha.ProductService.models.Product;
+import exceptions.ProductNotFoundException;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpMessageConverterExtractor;
@@ -22,8 +23,11 @@ public class FakeStoreProductService implements ProductService {
     }
 
     @Override
-    public Product getProduct(Long id) {
+    public Product getProduct(Long id) throws ProductNotFoundException {
         FakeStoreProductDto fakeStoreProductDto = restTemplate.getForObject("https://fakestoreapi.com/products/"+ id, FakeStoreProductDto.class);
+        if(fakeStoreProductDto == null) {
+            throw new ProductNotFoundException(id, "Product with id " + id + " not found");
+        }
         return convertFakeStoreDtoToProduct(fakeStoreProductDto);
     }
 
