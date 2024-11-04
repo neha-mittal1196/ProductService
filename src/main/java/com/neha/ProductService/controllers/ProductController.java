@@ -22,6 +22,9 @@ public class ProductController {
     @GetMapping("/{id}")
     public ResponseEntity<Product> getProductById(@PathVariable("id") Long id) throws ProductNotFoundException {
        Product product =  productService.getProduct(id);
+       product.setTitle("Macbook Air");
+       product.setPrice(120000);
+
        return new ResponseEntity<>(product, HttpStatus.OK);//product != null ? org.springframework.http.HttpStatus.OK : org.springframework.http.HttpStatus.NOT_FOUND);
     }
 
@@ -34,4 +37,10 @@ public class ProductController {
     public Product replaceProduct(@PathVariable("id") Long id, @RequestBody Product product) {
         return productService.replaceProduct(id, product);
     }
+
+    @PostMapping
+    public Product createProduct(@RequestBody Product product) {
+        return productService.createProduct(product);
+    }
 }
+
