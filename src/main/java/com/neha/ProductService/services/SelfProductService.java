@@ -13,7 +13,6 @@ import java.util.Optional;
 
 
 @Service("selfProductService")
-@Primary
 public class SelfProductService implements ProductService {
     private ProductRepository productRepository;
     private CategoryRepository categoryRepository;
@@ -55,8 +54,8 @@ public class SelfProductService implements ProductService {
         Category category = product.getCategory();
 
         if(category.getId() == null) {
-//            Category savedCategory = categoryRepository.save(category);
-//            product.setCategory(savedCategory);
+            Category savedCategory = categoryRepository.save(category);
+            product.setCategory(savedCategory);
         }
 
         Product savedProduct =  productRepository.save(product);

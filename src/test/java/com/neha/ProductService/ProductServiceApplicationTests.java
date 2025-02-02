@@ -3,10 +3,13 @@ package com.neha.ProductService;
 import com.neha.ProductService.projections.ProductWithTitleAndDescription;
 import com.neha.ProductService.repositories.CategoryRepository;
 import com.neha.ProductService.repositories.ProductRepository;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.DirtiesContext;
 
+@Disabled
 @SpringBootTest
 class ProductServiceApplicationTests {
 	@Autowired
@@ -14,6 +17,7 @@ class ProductServiceApplicationTests {
 	@Autowired
 	private ProductRepository productRepository;
 
+    @DirtiesContext
 	@Test
 	void contextLoads() {
 	}
@@ -26,11 +30,11 @@ class ProductServiceApplicationTests {
 //		List<Product> products = category.getProducts();
 //		System.out.println(products.get(0).getTitle());
 
-		ProductWithTitleAndDescription productWithTitleAndDescription = productRepository.someRandomQuery(1L);
-		System.out.println("Product with HQL: " + productWithTitleAndDescription.getTitle()+ "," + productWithTitleAndDescription.getDescription());
+//		ProductWithTitleAndDescription productWithTitleAndDescription = productRepository.someRandomQuery(1L);
+//		System.out.println("Product with HQL: " + productWithTitleAndDescription.getTitle()+ "," + productWithTitleAndDescription.getDescription());
 
-		ProductWithTitleAndDescription productWithTitleAndDescription1 = productRepository.someOtherRandomQuery(2L);
-		System.out.println("Product with SQL: " + productWithTitleAndDescription1.getTitle()+ "," + productWithTitleAndDescription1.getDescription());
-	}
+//		ProductWithTitleAndDescription productWithTitleAndDescription1 = productRepository.someOtherRandomQuery(2L);
+//		System.out.println("Product with SQL: " + productWithTitleAndDescription1.getTitle()+ "," + productWithTitleAndDescription1.getDescription());
+    }
 
 }

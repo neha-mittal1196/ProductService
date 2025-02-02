@@ -1,6 +1,5 @@
 package com.neha.ProductService;
 
-import exceptions.ProductNotFoundException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -12,12 +11,11 @@ public class RandomTest {
         int i = 1 + 1; //Arrange + Act
         boolean flag = true;
         //Assert - Check against the expected value.
-       assert i==2;
-       assertEquals(7,i, "1+1 should equal 2");
-       assertTrue(flag);
-       //assertThrows(ProductNotFoundException.class, func(10));
-       //assertNull();
-       //assertTimeout();
+        assertEquals(2, i, "1+1 should equal 2");
+        assertTrue(flag);
+        //assertThrows(ProductNotFoundException.class, func(10));
+        //assertNull();
+        //assertTimeout();
     }
 
 }
@@ -30,7 +28,7 @@ public class RandomTest {
 //Scenario- If we want to test the time taken by a particular function to get executed.
 
 /* 3A framework
-* Arrange
-* Act
-* Assert
-*/
+ * Arrange
+ * Act
+ * Assert
+ */

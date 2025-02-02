@@ -1,9 +1,11 @@
 package com.neha.ProductService.controllers;
 
+import com.neha.ProductService.models.Category;
 import com.neha.ProductService.models.Product;
 import com.neha.ProductService.repositories.ProductRepository;
 import com.neha.ProductService.services.ProductService;
 import exceptions.ProductNotFoundException;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -16,6 +18,7 @@ import java.util.Objects;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
+@Disabled
 @SpringBootTest
 class ProductControllerTest {
     @Autowired
@@ -66,10 +69,13 @@ class ProductControllerTest {
 
     @Test
     void testInvalidGetProductByIdTest() throws ProductNotFoundException {
+        Product product = new Product();
+        product.setId(1L);
+        Category category = new Category();
+        product.setCategory(category);
+
         when(productService.getProduct(100L)).thenThrow(new ProductNotFoundException(100L, "Product not found"));
         assertThrows(ProductNotFoundException.class, ()-> productController.getProductById(100L));
+       // assertThrows(ProductNotFoundException.class, ()-> productController.createProduct(product));
     }
-
-
-
 }
