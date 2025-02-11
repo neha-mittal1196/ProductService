@@ -5,7 +5,7 @@ import com.neha.ProductService.models.Category;
 import com.neha.ProductService.models.Product;
 import exceptions.ProductNotFoundException;
 import org.springframework.context.annotation.Primary;
-import org.springframework.data.redis.core.RedisTemplate;
+//import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpMessageConverterExtractor;
@@ -19,22 +19,23 @@ import java.util.stream.Collectors;
 
 
 @Service("fakeStoreProductService")
-@Primary
 public class FakeStoreProductService implements ProductService {
     private RestTemplate restTemplate;
-    private RedisTemplate<String, Object> redisTemplate;
+    //private RedisTemplate<String, Object> redisTemplate;
 
-    public FakeStoreProductService(RestTemplate restTemplate, RedisTemplate redisTemplate) {
+    public FakeStoreProductService(RestTemplate restTemplate
+                                   //,RedisTemplate redisTemplate
+                                   ) {
         this.restTemplate = restTemplate;
-        this.redisTemplate = redisTemplate;
+       // this.redisTemplate = redisTemplate;
     }
 
     @Override
     public Product getProduct(Long id) throws ProductNotFoundException {
-        Product product = (Product) redisTemplate.opsForHash().get("PRODUCTS", "PRODUCTS" + id);
-        if (product != null) {
-            return product;
-        }
+//        Product product = (Product) redisTemplate.opsForHash().get("PRODUCTS", "PRODUCTS" + id);
+//        if (product != null) {
+//            return product;
+//        }
 
         FakeStoreProductDto fakeStoreProductDto = restTemplate.getForObject("https://fakestoreapi.com/products/" + id, FakeStoreProductDto.class);
 //        if(fakeStoreProductDto == null) {
@@ -42,8 +43,8 @@ public class FakeStoreProductService implements ProductService {
 //        }
 
 
-        product = convertFakeStoreDtoToProduct(fakeStoreProductDto);
-        redisTemplate.opsForHash().put("PRODUCTS", "PRODUCTS" + id, product);
+        Product product = convertFakeStoreDtoToProduct(fakeStoreProductDto);
+        //redisTemplate.opsForHash().put("PRODUCTS", "PRODUCTS" + id, product);
         return product;
     }
 

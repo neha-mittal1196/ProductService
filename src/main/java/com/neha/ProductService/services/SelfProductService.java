@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 
+@Primary
 @Service("selfProductService")
 public class SelfProductService implements ProductService {
     private ProductRepository productRepository;

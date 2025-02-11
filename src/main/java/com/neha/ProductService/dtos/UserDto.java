@@ -1,5 +1,6 @@
 package com.neha.ProductService.dtos;
 
+import com.neha.ProductService.models.Role;
 import com.neha.ProductService.models.User;
 import lombok.Getter;
 import lombok.Setter;
@@ -11,7 +12,7 @@ import java.util.List;
 public class UserDto {
     private String name;
     private String email;
-   // private List<Role> roles;
+    private List<Role> roles;
 
     public static UserDto from(User user) {
         if (user == null) {
